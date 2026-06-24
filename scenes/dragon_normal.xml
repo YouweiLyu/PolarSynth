@@ -1,0 +1,66 @@
+<scene version="3.0.0">
+    <default name="spp" value="256" />
+    <default name="width" value="1024" />
+    <default name="height" value="1024" />
+
+    <integrator type="aov">
+        <string name="aovs" value="depth:depth,normal:sh_normal,albedo:albedo" />
+        <integrator type="stokes" name="stokes">
+            
+            <integrator type="direct">
+                <integer name="shading_samples" value="32" />
+                <boolean name="hide_emitters" value="True" />
+            </integrator>
+        </integrator>
+    </integrator>
+    
+    <sensor type="perspective" id="sensor">
+
+        <float name="near_clip" value="0.001" />
+        <float name="far_clip" value="100000" />
+        
+        <float name="fov" value="20" />
+        <string name="fov_axis" value="y" />
+        <transform name="to_world">
+            <lookat origin="0.6784759309456556,2.1580194010159532,-1.970437178893601" target="0, 0, 0" up="0.0,1.0,0.0" />
+        </transform>
+        <sampler type="stratified">
+            <integer name="sample_count" value="32" />
+            <boolean name="jitter" value="False" />
+        </sampler>
+        <film type="hdrfilm">
+            <integer name="width" value="512" />
+            <integer name="height" value="512" />
+            <rfilter type="box" />
+        </film>
+    </sensor>
+
+    <shape type="obj">
+        <string name="filename" value="assets/models/dragon.obj" />
+        <bsdf type="pplastic">
+            <rgb name="diffuse_reflectance" value="0.5" />
+            <rgb name="specular_reflectance" value="1" />
+            <float name="alpha" value="0.1" />
+            <float name="int_ior" value="1.5" />
+            <float name="ext_ior" value="1.0" />
+            <string name="distribution" value="ggx" />
+        </bsdf>
+        <transform name="to_world">
+            <scale x="4" y="4" z="4" />
+            <translate x="0" y="0" z="0" />
+        </transform>
+    </shape>
+
+    
+    
+    <emitter type="envmap">
+        <string name="filename" value="assets/hdris/9C4A0003-e05009bcad.exr" />
+        <transform name="to_world">
+            <rotate x="1.0" y="0.0" z="0.0" angle="90" />
+        </transform>
+        <float name="scale" value="300"/>
+    </emitter>
+
+
+
+</scene>

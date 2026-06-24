@@ -1,0 +1,21 @@
+# Core numerics + imaging
+numpy>=1.23
+opencv-python>=4.7
+matplotlib>=3.5
+tqdm>=4.64
+
+# EXR I/O (Mitsuba and Blender both produce multi-layer EXR)
+OpenEXR>=1.3
+Imath>=0.0.3
+
+# Mitsuba 3 — install the wheel for your platform. The `llvm_spectral_polarized`
+# variant requires LLVM; `cuda_spectral_polarized` requires CUDA. Pick the
+# wheel matching your hardware.
+mitsuba>=3.3
+
+# Misc
+six>=1.16
+
+# Development / testing
+pytest>=7.0
+ruff>=0.5

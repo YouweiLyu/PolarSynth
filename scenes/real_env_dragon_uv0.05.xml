@@ -1,0 +1,69 @@
+<scene version="3.0.0">
+    <default name="spp" value="256" />
+    <default name="width" value="256" />
+    <default name="height" value="256" />
+
+    <integrator type="aov">
+        <string name="aovs" value="depth:depth,normal:sh_normal,position:position" />
+        <integrator type="stokes" name="stokes">
+            
+            <integrator type="direct">
+                <integer name="shading_samples" value="10" />
+                <boolean name="hide_emitters" value="True" />
+            </integrator>
+        </integrator>
+    </integrator>
+    
+    <sensor type="perspective" id="sensor">
+
+        <float name="near_clip" value="0.001" />
+        <float name="far_clip" value="100000" />
+        
+        <float name="fov" value="20" />
+        <string name="fov_axis" value="y" />
+        <transform name="to_world">
+            <lookat origin="-0.05234924505375124,0.052357219311850535,-2.999086240528644" target="0, 0, 0" up="0.0,1.0,0.0" />
+        </transform>
+        <sampler type="stratified">
+            <integer name="sample_count" value="1" />
+        </sampler>
+        <film type="hdrfilm">
+            <integer name="width" value="$width" />
+            <integer name="height" value="$height" />
+            <rfilter type="gaussian" />
+        </film>
+    </sensor>
+
+    <shape type="obj">
+        <string name="filename" value="assets/models/dragon_uv.obj" />
+        <bsdf type="pplastic">
+            <texture name="diffuse_reflectance" type="bitmap">
+                <string name="filename" value="assets/materials/forest_ground_04/forest_ground_04_4K_Color.jpg"/>
+                <transform name="to_uv">
+                    <scale x="0.05" y="0.05" />
+                </transform>
+            </texture>
+            <!-- <texture name="alpha" type="bitmap">
+                <string name="filename" value="./ply/texture/Concrete042A_1K-JPG_Roughness.jpg">
+                </string>
+            </texture> -->
+            <float name="int_ior" value="1.5" />
+
+            <string name="distribution" value="ggx" />
+
+        </bsdf>
+        <transform name="to_world">
+            <scale x="4" y="4" z="4" />
+            <translate x="0" y="0" z="-4" />
+        </transform>
+    </shape>
+
+    
+    
+    <emitter type="envmap">
+        <string name="filename" value="assets/hdris/9C4A0003-e05009bcad.exr" />
+        <float name='scale' value="200" />
+    </emitter>
+
+
+</scene>

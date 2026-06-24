@@ -1,0 +1,45 @@
+# Build / cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Local secrets / env overrides (use .env.example as template)
+.env
+
+# Asset and dataset roots (user-provided; never commit large binaries)
+assets/
+datasets/
+mitsuba_data/
+
+# Render output and intermediates
+renderings/
+renderings_blender/
+tmp/
+tmp*/
+training/
+test/
+
+# Asset binaries that may accidentally land here
+*.exr
+*.png
+*.jpg
+*.jpeg
+*.obj
+*.stl
+*.ply
+*.fbx
+*.glb
+*.c4d
+*.ztl
+*.mtl
+*.npy
+
+# Asset lists that are usually user-specific
+txts/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp

@@ -1,0 +1,18 @@
+<scene version="3.3.0">
+    <integrator type="aov">
+        <string name="aovs" value="depth:depth,normal:sh_normal,albedo:albedo"/>
+        <integrator type="stokes" name="stokes">
+            <!-- <integrator type="path">
+                <integer name="max_depth" value="-1" />
+                <integer name="rr_depth" value="20" />
+                <boolean name="hide_emitters" value="false" />
+            </integrator> -->
+            <integrator type="direct">
+                <integer name="shading_samples" value="32" />
+            </integrator>
+            <!-- <integrator type="path">
+                <integer name="max_depth" value="-1"/>
+            </integrator> -->
+        </integrator>
+    </integrator>
+</scene>

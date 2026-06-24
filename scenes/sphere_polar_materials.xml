@@ -1,0 +1,84 @@
+<scene version="3.3.0">
+    <integrator type="aov">
+            <string name="aovs" value="depth:depth,normal:sh_normal,albedo:albedo"/>
+            <integrator type="stokes" name="stokes">
+                <!-- <integrator type="path">
+                    <integer name="max_depth" value="-1" />
+                    <integer name="rr_depth" value="20" />
+                    <boolean name="hide_emitters" value="false" />
+                </integrator> -->
+                <integrator type="direct">
+                    <integer name="shading_samples" value="32" />
+                </integrator>
+                <!-- <integrator type="path">
+                    <integer name="max_depth" value="-1"/>
+                </integrator> -->
+            </integrator>
+    </integrator>
+    
+    <sensor type="perspective">
+        <float name="near_clip" value="1" />
+        <float name="far_clip" value="1000" />
+        <float name="fov" value="30.0" />
+        <transform name="to_world">
+            <lookat target="0.0, 0.0, 0.0" 
+                    origin="40.0, 0.0, 0.0" 
+                    up="0.0, 0, 1" />
+        </transform>
+        <film type="hdrfilm">
+            <rfilter type="gaussian" />
+            <integer name="width" value="512" />
+            <integer name="height" value="512" />
+        </film>
+        <sampler type="stratified">
+            <integer name="sample_count" value="81" />
+        </sampler>
+    </sensor>
+    <shape type="sphere">
+        <bsdf type="roughconductor">
+            <string name="material" value="Au"/>
+        </bsdf>
+        <point name="center" x="0" y="0" z="0"/>
+        <float name="radius" value="1.5"/>
+    </shape>
+    <shape type="sphere">
+        <bsdf type="conductor">
+            <string name="material" value="Ag"/>
+        </bsdf>
+        <point name="center" x="0" y="0" z="4"/>
+        <float name="radius" value="1.5"/>
+    </shape>
+    <shape type="sphere">
+        <bsdf type="pplastic">
+            <rgb name="diffuse_reflectance" value="0.5"/>
+            <rgb name="specular_reflectance" value="1"/>
+            <float name="alpha" value="0.1" />
+            <float name="int_ior" value="1.5" />
+            <float name="ext_ior" value="1.0" />
+            <string name="distribution" value="ggx" />
+        </bsdf>
+        <point name="center" x="0" y="4" z="0"/>
+        <float name="radius" value="1.5"/>
+    </shape>
+    <shape type="sphere">
+        <bsdf type="dielectric">
+            <float name="int_ior" value="1.504"/>
+            <float name="ext_ior" value="1.0"/>
+        </bsdf>
+        <medium type="homogeneous" name="interior">
+            <float name="scale" value="4"/>
+            <rgb name="sigma_t" value="1, 1, 0.5"/>
+            <rgb name="albedo" value="0.0, 0.0, 0.0"/>
+        </medium>
+        <point name="center" x="0" y="0" z="-4"/>
+        <float name="radius" value="1.5"/>
+    </shape>
+    
+    <emitter type="envmap">
+        <string name="filename" value="assets/hdris/9C4A0003-e05009bcad.exr" />
+        <transform name="to_world">
+            <rotate x="1.0" y="0.0" z="0.0" angle="90" />
+        </transform>
+        <float name="scale" value="100"/>
+    </emitter>
+</scene>

@@ -1,0 +1,73 @@
+<scene version="3.3.0">
+    <integrator type="aov">
+        <string name="aovs" value="depth:depth,normal:sh_normal,albedo:albedo"/>
+        <integrator type="stokes" name="stokes">
+            <!-- <integrator type="path">
+                <integer name="max_depth" value="-1" />
+                <integer name="rr_depth" value="20" />
+                <boolean name="hide_emitters" value="false" />
+            </integrator> -->
+            <integrator type="direct">
+                <integer name="shading_samples" value="32" />
+            </integrator>
+        </integrator>
+    </integrator>
+
+    <sensor type="perspective">
+        <float name="near_clip" value="1" />
+        <float name="far_clip" value="1000" />
+        <float name="fov" value="22.0" />
+        <transform name="to_world">
+            <lookat target="0.0, 0.0, 0.0" 
+                    origin="30.0, 0.0, 0.0" 
+                    up="0.0, 0.0, 1.0" />
+        </transform>
+        <film type="hdrfilm">
+            <rfilter type="gaussian" />
+            <integer name="width" value="512" />
+            <integer name="height" value="512" />
+        </film>
+        <sampler type="stratified">
+            <integer name="sample_count" value="144" />
+        </sampler>
+    </sensor>
+
+    <shape type="obj">
+        <string name="filename" value="assets/models/sphere.obj"/>
+        <bsdf type="normalmap">
+            <texture name="normalmap" type="bitmap">
+                <boolean name="raw" value="true"/>
+                <string name="filename" value="assets/materials/forest_ground_04/forest_ground_04_4K_NormalGL.jpg"/>
+                <transform name="to_uv">
+                    <scale x="0.3" y="0.3"/>
+                </transform>
+            </texture>
+            <bsdf type="pplastic">
+                <texture type="bitmap" name="diffuse_reflectance" >
+                    <string name="filename" value="assets/materials/forest_ground_04/forest_ground_04_4K_Color.jpg"/>
+                    <string name="wrap_mode" value="repeat"/>
+                    <transform name="to_uv">
+                        <scale x="0.3" y="0.3"/>
+                    </transform>
+                </texture>
+                <rgb name="specular_reflectance" value="1" />
+                <float name="alpha" value="0.01" />
+                <float name="int_ior" value="1.5" />
+                <float name="ext_ior" value="1.0" />
+                <string name="distribution" value="ggx" />
+            </bsdf>
+        </bsdf>
+        <transform name="to_world">
+            <translate x="1.0" y="0.0" z="0.5" />
+        </transform>
+    </shape>
+        
+    <emitter type="envmap">
+        <string name="filename" value="assets/hdris/9C4A0003-e05009bcad.exr" />
+        <transform name="to_world">
+            <!-- <matrix value="$envmap_to_world" /> -->
+            <rotate x="1.0" y="0.0" z="0.0" angle="90" />
+        </transform>
+        <float name="scale" value="800"/>
+    </emitter>
+</scene>
